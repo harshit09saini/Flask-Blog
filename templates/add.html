@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section id="content-wrap" class="site-page">
+    <div class="row">
+        <div class="col-twelve">
+
+            <section>
+                <div class="primary-content">
+
+                    <h1 class="entry-title add-bottom">Add a New Post</h1>
+                    {{ current_user.username }}
+                    {% if message %}
+                        <p>{{ message }}</p>
+                    {% endif %}
+                    <form name="cForm" id="cForm" method="post" action="{{ url_for('add_post') }} ">
+                        {{ form.csrf_token }}
+                        <fieldset>
+                            <div class="form-field">
+                                {{ form.title.label }}{{ form.title(class="full-width", placeholder="Blog Post Title")
+                                }}
+                            </div>
+
+                            <div class="form-field">
+                                {{ form.img_url.label }}{{ form.img_url(class="full-width", placeholder="Image URL")}}
+                            </div>
+
+                            <div class="message form-field">
+                                {{ form.content.label }}{{ form.content(class="full-width")
+                                }}
+                            </div>
+                            <div class="form-field">
+                                <br>
+                                {{ form.submit }}
+                            </div>
+                            <!--                            <button type="submit" class="submit button-primary full-width-on-mobile">Submit</button>-->
+
+                        </fieldset>
+                    </form> <!-- end form -->
+
+            </section>
+
+
+        </div> <!-- end col-twelve -->
+    </div> <!-- end row -->
+</section> <!-- end content -->
+
+{{ ckeditor.load(pkg_type="full-all") }}
+{{ ckeditor.config(name='body') }}
+
+{% endblock %}

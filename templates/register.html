@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section id="content-wrap" class="site-page">
+    <div class="row">
+        <div class="col-twelve">
+
+            <section>
+                <div class="primary-content">
+
+                    <h1 class="entry-title add-bottom">Create an Account</h1>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                            <p>{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    <form name="cForm" id="cForm" method="post" action="{{ url_for('register') }} " novalidate>
+                        {{ form.csrf_token }}
+                        <fieldset>
+                            <div class="form-field">
+                                {{ form.username.label }}{{ form.username(class="full-width", placeholder="Username")
+                                }}
+                            </div>
+
+                            <div class="form-field">
+                                {{ form.email.label }}{{ form.email(class="full-width", placeholder="Email")
+                                }}
+                            </div>
+
+                            <div class="form-field">
+                                {{ form.password.label }}{{ form.password(class="full-width", placeholder="Password")}}
+                            </div>
+
+                            <div class="form-field">
+                                <br>
+                                {{ form.submit(class="button button-primary") }}
+                            </div>
+                            <!--                            <button type="submit" class="submit button-primary full-width-on-mobile">Submit</button>-->
+
+                        </fieldset>
+                    </form> <!-- end form -->
+
+            </section>
+
+
+        </div> <!-- end col-twelve -->
+    </div> <!-- end row -->
+</section> <!-- end content -->
+
+{% endblock %}
