@@ -8,10 +8,18 @@ from flask_login import UserMixin, login_user, LoginManager, logout_user, curren
 from functools import wraps
 from flask_gravatar import Gravatar
 import os
+import re
+
+# SQLAlchemy 1.4.x has removed support for the postgres:// URI scheme, which is used by Heroku Postgres
+uri = os.getenv("DATABASE_URL")  # or other relevant config var
+print(uri)
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+    print(uri)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL_2", "sqlite:///blog.db")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(uri, "sqlite:///blog.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 ckeditor = CKEditor(app)
