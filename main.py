@@ -74,7 +74,7 @@ class Comment(db.Model):
 
 
 # db.drop_all()
-# db.create_all()
+db.create_all()
 
 # new_user = User(username="harshitttt", email="123@1233123", password="12312")
 # new_blog = Blog(title="hekashfa", img_url="sakfjasfkj", content="ajsfhsjfah", user_id=current_user.id)
